@@ -1,0 +1,19 @@
+p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"user.readByGroup.vss"})
+
+// FOAM
+// simple password management
+p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"menu.read.reset-password"})
+
+// spid
+p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"serviceprovider.read.foam"})
+
+// Password
+p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"service.passwordDAO"})
+p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"menu.read.password"})
+p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"password.create"})
+p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"password.read.*"})
+// TODO: add authorizeOn
+p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"password.update.*"})
+
+// p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"menu.read.vssAdmin"})
+p({class:"foam.core.auth.GroupPermissionJunction",sourceId:"vss",targetId:"menu.read.vss.crunch.personalsettings"})

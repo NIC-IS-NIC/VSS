@@ -1,0 +1,48 @@
+p({
+  "class":"foam.core.auth.User",
+  "id": 118287042,
+  "spid":"foam",
+  "userName":"joel",
+  "firstName":"Joel",
+  "lastName":"H",
+  "email":"joel@test.com",
+  "emailVerified":true,
+  "status":2,
+  "compliance":1,
+  "group": "journal",
+  "lifecycleState":1,
+  "loginEnabled":true,
+  "password":"KXhxt4A92FU=:cBZUzMFSstyVdwVbIL1r6ZTFKLVz3DYZw/apfnrUmInWuenVoGrpYCFQu4ms1sNZblsR1v/AUgDZAV5/JS0Enw=="
+})
+p({
+  "class":"foam.core.auth.User",
+  "id": 135837326,
+  "spid":"foam",
+  "userName":"nic",
+  "firstName":"Nicholas",
+  "lastName":"H",
+  "email":"nic@test.com",
+  "emailVerified":true,
+  "status":2,
+  "compliance":1,
+  "group": "journal",
+  "lifecycleState":1,
+  "loginEnabled":true,
+  "password":"KXhxt4A92FU=:cBZUzMFSstyVdwVbIL1r6ZTFKLVz3DYZw/apfnrUmInWuenVoGrpYCFQu4ms1sNZblsR1v/AUgDZAV5/JS0Enw=="
+})
+p({
+  "class":"foam.core.auth.User",
+  "id": 88030709,
+  "spid":"foam",
+  "userName":"lorraine",
+  "firstName":"Lorraine",
+  "lastName":"H",
+  "email":"lorraine@test.com",
+  "emailVerified":true,
+  "status":2,
+  "compliance":1,
+  "group": "journal",
+  "lifecycleState":1,
+  "loginEnabled":true,
+  "password":"KXhxt4A92FU=:cBZUzMFSstyVdwVbIL1r6ZTFKLVz3DYZw/apfnrUmInWuenVoGrpYCFQu4ms1sNZblsR1v/AUgDZAV5/JS0Enw=="
+})
