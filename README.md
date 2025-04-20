@@ -16,4 +16,4 @@ Pull in javascript dependencies
 
 `depoyment/demo/run.sh`
 
-* website will be hosted at http://localhost:8080
+* website will be hosted at http://localhost:8200
