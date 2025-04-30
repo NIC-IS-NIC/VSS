@@ -13,3 +13,37 @@ p({
     """,
   "client":"{\"of\":\"hughes.vss.Make\"}"
 })
+
+p({
+  "class":"foam.core.boot.CSpec",
+  "name":"modelDAO",
+  "serve":true,
+  "serviceScript":"""
+    return new foam.dao.EasyDAO.Builder(x)
+      .setOf(hughes.vss.Model.getOwnClassInfo())
+      .setGuid(true)
+      .setJournalType(foam.dao.JournalType.SINGLE_JOURNAL)
+      .setJournalName("models")
+      .setRuler(false)
+      .setPm(true)
+      .build();
+    """,
+  "client":"{\"of\":\"hughes.vss.Model\"}"
+})
+
+p({
+  "class":"foam.core.boot.CSpec",
+  "name":"vehicleDAO",
+  "serve":true,
+  "serviceScript":"""
+    return new foam.dao.EasyDAO.Builder(x)
+      .setOf(hughes.vss.Vehicle.getOwnClassInfo())
+      .setGuid(true)
+      .setJournalType(foam.dao.JournalType.SINGLE_JOURNAL)
+      .setJournalName("vehicles")
+      .setRuler(false)
+      .setPm(true)
+      .build();
+    """,
+  "client":"{\"of\":\"hughes.vss.Vehicle\"}"
+})
