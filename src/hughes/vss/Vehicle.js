@@ -23,7 +23,7 @@ foam.CLASS({
       required: true,
       postSet: function(oldValue, newValue) {
         if ( oldValue !== newValue ) {
-          this.model = undefined;        
+          this.model = undefined;
         }
       }
     },
@@ -46,7 +46,7 @@ foam.CLASS({
     },
     {
       name: 'year',
-      class: 'Integer',
+      class: 'Int',
       required: true
     },
     {
