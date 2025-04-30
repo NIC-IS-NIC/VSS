@@ -1,0 +1,14 @@
+p({  "class":"foam.core.boot.CSpec",
+  "name":"makeDAO",
+    "serve":true,
+    "serviceScript":"""    
+    return new foam.dao.EasyDAO.Builder(x)      
+        .setOf(hughes.vss.Make.getOwnClassInfo())      
+        .setJournalType(foam.dao.JournalType.SINGLE_JOURNAL)      
+        .setJournalName("makes")     
+        .setRuler(false)      
+        .setPm(true)      
+        .build();    
+    """,
+    "client":"{\"of\":\"hughes.vss.Make\"}"
+    })
