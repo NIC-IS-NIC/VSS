@@ -15,6 +15,12 @@ foam.CLASS({
       required: true
     },
     {
+      name: 'vehicle',
+      class: 'Reference',
+      of: 'hughes.vss.MaintenanceVehicle',
+      required: true
+    },
+    {
       name: 'distance',
       class: 'Int',
       required: true
