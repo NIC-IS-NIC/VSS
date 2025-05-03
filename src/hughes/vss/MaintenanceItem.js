@@ -2,7 +2,7 @@ foam.CLASS({
   package: 'hughes.vss',
   name: 'MaintenanceItem',
   discription: 'service items cars',
-  properites: [
+  properties: [
     {
       name: 'id',
       class: 'String',

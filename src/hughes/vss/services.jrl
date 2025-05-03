@@ -50,7 +50,7 @@ p({
 
 p({
   "class":"foam.core.boot.CSpec",
-  "name":"maintenanceitemDAO",
+  "name":"maintenanceItemDAO",
   "serve":true,
   "serviceScript":"""
     return new foam.dao.EasyDAO.Builder(x)
