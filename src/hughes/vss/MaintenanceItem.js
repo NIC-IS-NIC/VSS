@@ -16,11 +16,19 @@ foam.CLASS({
     },
     {
       name: 'distance',
-      class: 'Int'
+      class: 'Int',
+      required: true
     },
     {
-      name: 'frequency',
-      class: ''
+      name: 'time',
+      class: 'Int',
+      required: true
+    },
+    {
+      name: 'timeUnit',
+      class: 'Enum',
+      of: 'foam.time.TimeUnit',
+      value: 'MONTH'
     }
   ]
 })
