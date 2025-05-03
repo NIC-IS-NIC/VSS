@@ -50,17 +50,17 @@ p({
 
 p({
   "class":"foam.core.boot.CSpec",
-  "name":"maintenanceDAO",
+  "name":"maintenanceitemDAO",
   "serve":true,
   "serviceScript":"""
     return new foam.dao.EasyDAO.Builder(x)
-      .setOf(hughes.vss.Maintenance.getOwnClassInfo())
+      .setOf(hughes.vss.MaintenanceItem.getOwnClassInfo())
       .setGuid(true)
       .setJournalType(foam.dao.JournalType.SINGLE_JOURNAL)
-      .setJournalName("maintenances")
+      .setJournalName("maintenanceitems")
       .setRuler(false)
       .setPm(true)
       .build();
     """,
-  "client":"{\"of\":\"hughes.vss.Maintenance\"}"
+  "client":"{\"of\":\"hughes.vss.MaintenanceItem\"}"
 })

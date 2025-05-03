@@ -4,6 +4,6 @@ foam.POM({
     { name: 'Make',                                                   flags: 'js|java' },
     { name: 'Model',                                                  flags: 'js|java' },
     { name: 'Vehicle',                                                flags: 'js|java' },
-    { name: 'Maintenance',                                            flags: 'js|java' }
+    { name: 'MaintenanceItem',                                            flags: 'js|java' }
   ]
 });
