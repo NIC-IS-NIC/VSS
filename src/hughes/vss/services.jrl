@@ -47,3 +47,37 @@ p({
     """,
   "client":"{\"of\":\"hughes.vss.Vehicle\"}"
 })
+
+p({
+  "class":"foam.core.boot.CSpec",
+  "name":"maintenanceItemDAO",
+  "serve":true,
+  "serviceScript":"""
+    return new foam.dao.EasyDAO.Builder(x)
+      .setOf(hughes.vss.MaintenanceItem.getOwnClassInfo())
+      .setGuid(true)
+      .setJournalType(foam.dao.JournalType.SINGLE_JOURNAL)
+      .setJournalName("maintenanceitems")
+      .setRuler(false)
+      .setPm(true)
+      .build();
+    """,
+  "client":"{\"of\":\"hughes.vss.MaintenanceItem\"}"
+})
+
+p({
+  "class":"foam.core.boot.CSpec",
+  "name":"maintenanceVehicleDAO",
+  "serve":true,
+  "serviceScript":"""
+    return new foam.dao.EasyDAO.Builder(x)
+      .setOf(hughes.vss.MaintenanceVehicle.getOwnClassInfo())
+      .setGuid(true)
+      .setJournalType(foam.dao.JournalType.SINGLE_JOURNAL)
+      .setJournalName("maintenancevehicles")
+      .setRuler(false)
+      .setPm(true)
+      .build();
+    """,
+  "client":"{\"of\":\"hughes.vss.MaintenanceVehicle\"}"
+})

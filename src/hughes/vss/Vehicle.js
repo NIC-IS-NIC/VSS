@@ -2,6 +2,12 @@ foam.CLASS({
   package: 'hughes.vss',
   name: 'Vehicle',
   discription: 'Complete car/truck',
+  implements: [
+    {      
+      path: 'foam.mlang.Expressions',
+      flags: ['js'],    
+    }
+  ],
   requires: [
     'hughes.vss.Make',
     'hughes.vss.Model'
@@ -31,7 +37,6 @@ foam.CLASS({
       name: 'model',
       class: 'Reference',
       of: 'hughes.vss.Model',
-      required: true,
       view: function(_, X) {
         var choices = X.data.slot(function(make) {
           return X.modelDAO.where(X.data.EQ(X.data.Model.MAKE, make || ''));
@@ -70,7 +75,7 @@ foam.CLASS({
     },
     {
       name: 'purchaseKilometers',
-      class: 'Integer',
+      class: 'Int',
       required: true
     }
   ]
