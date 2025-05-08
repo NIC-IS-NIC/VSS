@@ -36,5 +36,13 @@ foam.CLASS({
       of: 'foam.time.TimeUnit',
       value: 'MONTH'
     }
+  ],
+  methods: [
+    {
+      name: 'toSummary',
+      code: function() {
+        return this.name;
+      },
+    }
   ]
 })

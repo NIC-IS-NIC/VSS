@@ -1,7 +1,7 @@
 foam.CLASS({
   package: 'hughes.vss',
-  name: 'Vehicle',
-  discription: 'Complete car/truck',
+  name: 'MaintenanceVehicle',
+  discription: 'the style of vehicle',
   implements: [
     {      
       path: 'foam.mlang.Expressions',
@@ -19,8 +19,7 @@ foam.CLASS({
     {
       name: 'id',
       class: 'String',
-      createVisibility: 'HIDDEN',
-      updateVisibility: 'RO'
+      visibility: 'HIDDEN'
     },
     {
       name: 'make',
@@ -54,45 +53,5 @@ foam.CLASS({
       class: 'Int',
       required: true
     },
-    {
-      name: 'trim',
-      class: 'String',
-      required: true
-    },
-    {
-      name: 'colour',
-      class: 'String',
-      required: true
-    },
-    {
-      name: 'vin',
-      class: 'String'
-    },
-    {
-      name: 'purchaseDate',
-      class: 'Date',
-      required: true
-    },
-    {
-      name: 'purchaseKilometers',
-      class: 'Int',
-      required: true
-    }
-  ],
-  methods: [
-    {
-      name: 'toSummary',
-      code: async function() {
-        var self = this;
-        return this.make$find.then(function(make) {
-          return self.model$find.then(function(model) {
-            var summary = make.name + ' ' + model.name;
-            if (self.trim) summary += ' ' + self.trim;
-            summary += ' ' + self.year;
-            return summary; 
-          })
-        });
-      },
-    }
   ]
 })

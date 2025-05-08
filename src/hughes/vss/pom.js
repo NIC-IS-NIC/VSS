@@ -5,6 +5,7 @@ foam.POM({
     { name: 'Model',                                                  flags: 'js|java' },
     { name: 'Vehicle',                                                flags: 'js|java' },
     { name: 'MaintenanceItem',                                        flags: 'js|java' },
-    { name: 'MaintenanceVehicle',                                     flags: 'js|java' }
+    { name: 'MaintenanceVehicle',                                     flags: 'js|java' },
+    { name: 'MaintenanceSchedule',                                    flags: 'js|java' }
   ]
 });
