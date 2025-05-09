@@ -81,3 +81,20 @@ p({
     """,
   "client":"{\"of\":\"hughes.vss.MaintenanceVehicle\"}"
 })
+
+p({
+  "class":"foam.core.boot.CSpec",
+  "name":"maintenanceScheduleDAO",
+  "serve":true,
+  "serviceScript":"""
+    return new foam.dao.EasyDAO.Builder(x)
+      .setOf(hughes.vss.MaintenanceSchedule.getOwnClassInfo())
+      .setGuid(true)
+      .setJournalType(foam.dao.JournalType.SINGLE_JOURNAL)
+      .setJournalName("maintenanceschedules")
+      .setRuler(false)
+      .setPm(true)
+      .build();
+    """,
+  "client":"{\"of\":\"hughes.vss.MaintenanceSchedule\"}"
+})

@@ -2,6 +2,9 @@ foam.CLASS({
   package: 'hughes.vss',
   name: 'MaintenanceItem',
   discription: 'service items cars',
+  imports: [
+    'maintenanceVehicleDAO',
+  ],
   properties: [
     {
       name: 'id',
@@ -18,7 +21,13 @@ foam.CLASS({
       name: 'vehicle',
       class: 'Reference',
       of: 'hughes.vss.MaintenanceVehicle',
-      required: true
+      required: true,
+      tableCellFormatter:function(value, obj) {
+        obj.maintenanceVehicleDAO
+        .find(value)
+        .then((maintenanceVehicle)=> this.add(maintenanceVehicle.toSummary()))
+        .catch((error) => this.add(value));
+      }
     },
     {
       name: 'distance',
@@ -35,6 +44,14 @@ foam.CLASS({
       class: 'Enum',
       of: 'foam.time.TimeUnit',
       value: 'MONTH'
+    }
+  ],
+  methods: [
+    {
+      name: 'toSummary',
+      code: function() {
+        return this.name;
+      },
     }
   ]
 })

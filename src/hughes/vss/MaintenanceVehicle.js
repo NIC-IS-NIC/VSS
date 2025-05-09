@@ -1,16 +1,17 @@
 foam.CLASS({
   package: 'hughes.vss',
-  name: 'Vehicle',
-  discription: 'Complete car/truck',
-  implements: [ 
-      { path: 'foam.mlang.Expressions', flags: ['js'] }
+  name: 'MaintenanceVehicle',
+  discription: 'the style of vehicle',
+  implements: [
+    { path: 'foam.mlang.Expressions', flags: ['js'] }
   ],
   requires: [
     'hughes.vss.Make',
     'hughes.vss.Model'
   ],
   imports: [
-    'modelDAO'
+    'modelDAO',
+    'makeDAO'
   ],
   properties: [
     {
@@ -47,7 +48,7 @@ foam.CLASS({
         }, X);
       },
       tableCellFormatter:function(value, obj) {
-        this.__subSubContext__.modelDAO
+        obj.modelDAO
         .find(value)
         .then((model)=> this.add(model.name))
         .catch((error) => this.add(value));
@@ -58,45 +59,18 @@ foam.CLASS({
       class: 'Int',
       required: true
     },
-    {
-      name: 'trim',
-      class: 'String',
-      required: true
-    },
-    {
-      name: 'colour',
-      class: 'String',
-      required: true
-    },
-    {
-      name: 'vin',
-      class: 'String'
-    },
-    {
-      name: 'purchaseDate',
-      class: 'Date',
-      required: true
-    },
-    {
-      name: 'purchaseKilometers',
-      class: 'Int',
-      required: true
-    }
   ],
-  methods: [
+  methods:[
     {
       name: 'toSummary',
       code: async function() {
         var self = this;
         return this.make$find.then(function(make) {
           return self.model$find.then(function(model) {
-            var summary = make.id + ' ' + model.name;
-            if (self.trim) summary += ' ' + self.trim;
-            summary += ' ' + self.year;
-            return summary; 
-          })
+            return make.id + ' ' + model.name + ' ' + self.year; 
+          });
         });
-      },
+      }
     }
   ]
 })
