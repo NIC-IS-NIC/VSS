@@ -3,17 +3,15 @@ foam.CLASS({
   name: 'MaintenanceSchedule',
   discription: 'List of Maintenance items for vehicle',
   implements: [
-    {      
-      path: 'foam.mlang.Expressions',
-      flags: ['js'],    
-    }
+    { path: 'foam.mlang.Expressions', flags: ['js'] }
   ],
   requires: [
     'hughes.vss.MaintenanceItem',
     'hughes.vss.MaintenanceVehicle'
   ],
   imports: [
-    'maintenanceItemDAO'
+    'maintenanceItemDAO',
+    'maintenanceVehicleDAO'
   ],
   properties: [
     {
@@ -22,14 +20,21 @@ foam.CLASS({
       visibility: 'HIDDEN'
     },
     {
-      name: 'vehicle',
-      class: 'Reference',
-      of: 'hughes.vss.MaintenanceVehicle'
-    },
-    {
       name: 'name',
       class: 'String'
     },
+    {
+      name: 'vehicle',
+      class: 'Reference',
+      of: 'hughes.vss.MaintenanceVehicle',
+      tableCellFormatter:function(value, obj) {
+        obj.maintenanceVehicleDAO
+        .find(value)
+        .then((maintenanceVehicle)=> this.add(maintenanceVehicle.toSummary()))
+        .catch((error) => this.add(value));
+      }
+    },
+
     {
       name: 'maintenanceItems',
       class: 'Array',
@@ -56,6 +61,5 @@ foam.CLASS({
       readVisibility: 'RO',
       updateVisibility: 'RO'
     },
-
   ]
 })
