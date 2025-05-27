@@ -10,12 +10,14 @@ foam.CLASS({
   requires: [
     'hughes.vss.Vehicle',
     'hughes.vss.MaintenanceItem',
-    'hughes.vss.MaintenanceVehicle'
+    'hughes.vss.MaintenanceVehicle',
+    'hughes.vss.ServiceSchedule'
   ],
   imports: [
     'vehicleDAO',
     'maintenanceItemDAO',
-    'maintenanceVehicleDAO'
+    'maintenanceVehicleDAO',
+    'serviceScheduleDAO'
   ],
   properties: [
     {
@@ -40,7 +42,7 @@ foam.CLASS({
       class: 'Date',
       factory: function () {return new Date();},
       postSet: function (old,nu) {
-        this. generateServiceItems();
+        this.generateServiceItems();
       }
     },
     {
@@ -59,23 +61,48 @@ foam.CLASS({
     },
   ],
   methods: [
-    // {
-    //   name: 'generateServiceItems',
-    //   code: function () { }
-    // }
-  function generateServiceItems () {
-    //search vehicle in maintenance vehicledao for maintenance vehicle.
-    //take maintenance vehicle then search maintenanceITem DAo 
-    //then add the maintenance item to a service scheduel 
-    let self = this;
-    if (!this.vehicle) return;
-    this.vehicleDAO.find(this.vehicle).then(function(v){
-      self.maintenanceVehicleDAO.find(v.maintenanceVehicle).then(function(mv){
-        self.maintenanceItemDAO.where(self.EQ(self.MaintenanceItem.VEHICLE,mv.id)).select().then(function(items){
-          self.serviceItems = items.array;
+    async function generateServiceItems() {
+      let self = this;
+      if (!this.vehicle) return;
+      let schedules = await this.serviceScheduleDAO.where(
+        self.AND(
+          self.EQ(self.ServiceSchedule.VEHICLE, self.vehicle)
+        )
+      )
+        .orderBy(self.DESC(self.ServiceSchedule.SERVICE_DATE))
+        .limit(1)
+        .select();
+
+      var schedule
+      if (schedules.length > 0) {
+        schedule = schedules[0];
+      }
+      this.vehicleDAO.find(this.vehicle).then(function (v) {
+        var odis;
+        var odate;
+        if (schedule) {
+          odis = schedule.distance;
+          odate = schedule.serviceDate;
+        } else {
+          odis = v.purchaseKilometers;
+          odate = v.purchaseDate;
+        }
+        let ddis = self.distance - odis;
+        let ddate = self.serviceDate.getTime() - odate.getTime()
+        self.maintenanceVehicleDAO.find(v.maintenanceVehicle).then(function (mv) {
+          self.maintenanceItemDAO.where(
+            self.AND(
+              self.EQ(self.MaintenanceItem.VEHICLE, mv.id),
+              self.OR(
+                self.LT(self.MaintenanceItem.DISTANCE, ddis),
+                self.LT(self.MaintenanceItem.TIME_MILLI, ddate)
+              )
+            )
+          ).select().then(function (items) {
+            self.serviceItems = items.array;
+          })
         })
-      })
-    });
-  }
-]
+      });
+    }
+  ]
 })

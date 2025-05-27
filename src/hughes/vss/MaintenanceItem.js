@@ -44,6 +44,14 @@ foam.CLASS({
       class: 'Enum',
       of: 'foam.time.TimeUnit',
       value: 'MONTH'
+    },
+    {
+      name: 'timeMilli',
+      class: 'Long',
+      visibility: 'HIDDEN',
+      javaGetter: `
+        return getTimeUnit().getConversionFactorMs() * getTime();
+      `
     }
   ],
   methods: [
