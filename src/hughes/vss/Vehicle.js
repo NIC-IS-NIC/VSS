@@ -23,44 +23,13 @@ foam.CLASS({
       visibility: 'HIDDEN'
     },
     {
-      name: 'make',
+      name: 'maintenanceVehicle',
+      label: 'Base Model',
       class: 'Reference',
-      of: 'hughes.vss.Make',
-      required: true,
-      postSet: function (oldValue, newValue) {
-        if (oldValue !== newValue) {
-          this.model = undefined;
-        }
+      of: 'hughes.vss.MaintenanceVehicle',
+      tableCellFormatter:function(value, obj) {
+        this.add (obj.toSummary());
       }
-    },
-    {
-      name: 'model',
-      class: 'Reference',
-      of: 'hughes.vss.Model',
-      required: true,
-      view: function (_, X) {
-        var choices = X.data.slot(function (make) {
-          return X.modelDAO.where(X.data.EQ(X.data.Model.MAKE, make));
-        });
-        return foam.u2.view.ChoiceView.create({
-          objToChoice: function (model) {
-            return [model.id, model.name];
-          },
-          dao$: choices,
-          placeholder: '--'
-        }, X);
-      },
-      tableCellFormatter: function (value, obj) {
-        this.__subSubContext__.modelDAO
-          .find(value)
-          .then((model) => this.add(model.name))
-          .catch((error) => this.add(value));
-      }
-    },
-    {
-      name: 'year',
-      class: 'Int',
-      required: true
     },
     {
       name: 'trim',
@@ -99,14 +68,8 @@ foam.CLASS({
       name: 'toSummary',
       code: async function () {
         var self = this;
-        return this.make$find.then(function (make) {
-          return self.model$find.then(function (model) {
-            var summary = make.id + ' ' + model.name;
-            if (self.trim) summary += ' ' + self.trim;
-            summary += ' ' + self.year;
-            return summary;
-          })
-        });
+        let mv = await this.maintenanceVehicle$find;
+        return mv.toSummary();
       }
     }
   ],
