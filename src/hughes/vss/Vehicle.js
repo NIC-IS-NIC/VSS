@@ -2,15 +2,19 @@ foam.CLASS({
   package: 'hughes.vss',
   name: 'Vehicle',
   discription: 'Complete car/truck',
-  implements: [ 
-      { path: 'foam.mlang.Expressions', flags: ['js'] }
+  implements: [
+    { path: 'foam.mlang.Expressions', flags: ['js'] }
   ],
   requires: [
     'hughes.vss.Make',
-    'hughes.vss.Model'
+    'hughes.vss.Model',
+    'hughes.vss.ServiceSchedule'
   ],
   imports: [
-    'modelDAO'
+    'makeDAO',
+    'modelDAO',
+    'routeTo',
+    'serviceScheduleDAO'
   ],
   properties: [
     {
@@ -19,44 +23,13 @@ foam.CLASS({
       visibility: 'HIDDEN'
     },
     {
-      name: 'make',
+      name: 'maintenanceVehicle',
+      label: 'Base Model',
       class: 'Reference',
-      of: 'hughes.vss.Make',
-      required: true,
-      postSet: function(oldValue, newValue) {
-        if ( oldValue !== newValue ) {
-          this.model = undefined;
-        }
-      }
-    },
-    {
-      name: 'model',
-      class: 'Reference',
-      of: 'hughes.vss.Model',
-      required: true,
-      view: function(_, X) {
-        var choices = X.data.slot(function(make) {
-          return X.modelDAO.where(X.data.EQ(X.data.Model.MAKE, make));
-        });
-        return foam.u2.view.ChoiceView.create({
-          objToChoice: function(model) {
-            return [model.id, model.name];
-          },
-          dao$: choices,
-          placeholder: '--'
-        }, X);
-      },
+      of: 'hughes.vss.MaintenanceVehicle',
       tableCellFormatter:function(value, obj) {
-        this.__subSubContext__.modelDAO
-        .find(value)
-        .then((model)=> this.add(model.name))
-        .catch((error) => this.add(value));
+        this.add (obj.toSummary());
       }
-    },
-    {
-      name: 'year',
-      class: 'Int',
-      required: true
     },
     {
       name: 'trim',
@@ -78,25 +51,43 @@ foam.CLASS({
       required: true
     },
     {
-      name: 'purchaseKilometers',
+      name: 'purchaseodoMeter',
       class: 'Int',
       required: true
+    },
+    {
+      name: 'serviceScheduleMenu',
+      class: 'String',
+      value: 'serviceSchedule',
+      transient: true,
+      visibility: 'HIDDEN'
     }
   ],
   methods: [
     {
       name: 'toSummary',
-      code: async function() {
+      code: async function () {
         var self = this;
-        return this.make$find.then(function(make) {
-          return self.model$find.then(function(model) {
-            var summary = make.id + ' ' + model.name;
-            if (self.trim) summary += ' ' + self.trim;
-            summary += ' ' + self.year;
-            return summary; 
-          })
-        });
+        let mv = await this.maintenanceVehicle$find;
+        return mv.toSummary();
+      }
+    }
+  ],
+  actions: [
+    {
+      name: 'createServiceSchedule',
+      isAvaible: function(id) {
+        return id;
       },
+      code: function (X) {
+        var self = this;
+        var serviceSchedule = this.ServiceSchedule.create({
+          vehicle: self.id
+        });
+        this.serviceScheduleDAO.put(serviceSchedule).then(function (s) {
+          self.routeTo(self.serviceScheduleMenu + "/" + s.id);
+        });
+      }
     }
   ]
 })
