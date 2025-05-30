@@ -57,7 +57,18 @@ foam.CLASS({
       name: 'serviceItems',
       class: 'FObjectArray',
       of: 'hughes.vss.MaintenanceItem',
-      visibility: 'RO'
+      visibility: 'RO',
+      view: function(_, X) {
+        return {
+          class: 'foam.u2.view.ArrayView',
+          valueView: { 
+            class: 'hughes.vss.MaintenanceItemCitationView', 
+            showChildren: false
+            },
+            enableAdding: false,
+            enableRemoving: false
+        }
+      }
     },
   ],
   methods: [
@@ -84,7 +95,7 @@ foam.CLASS({
           odis = schedule.distance;
           odate = schedule.serviceDate;
         } else {
-          odis = v.purchaseKilometers;
+          odis = v.purchaseodoMeter;
           odate = v.purchaseDate;
         }
         let ddis = self.distance - odis;
