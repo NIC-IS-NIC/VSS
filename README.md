@@ -14,6 +14,6 @@ Pull in javascript dependencies
 
 ## Build and Run
 
-`deployment/demo/run.sh`
+`./build.sh -Jdemo`
 
 * website will be hosted at http://localhost:8200
