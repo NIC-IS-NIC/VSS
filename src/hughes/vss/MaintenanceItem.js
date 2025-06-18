@@ -30,7 +30,7 @@ foam.CLASS({
       }
     },
     {
-      name: 'distance',
+      name: 'odometer',
       class: 'Int',
       required: true
     },

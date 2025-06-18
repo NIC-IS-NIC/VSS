@@ -51,7 +51,7 @@ foam.CLASS({
       required: true
     },
     {
-      name: 'purchaseodoMeter',
+      name: 'purchaseOdometer',
       class: 'Int',
       required: true
     },
