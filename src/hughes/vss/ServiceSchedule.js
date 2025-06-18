@@ -98,14 +98,14 @@ foam.CLASS({
           odis = v.purchaseOdometer;
           odate = v.purchaseDate;
         }
-        let ddis = self.odemeter - odis;
+        let ddis = self.odometer - odis;
         let ddate = self.serviceDate.getTime() - odate.getTime()
         self.maintenanceVehicleDAO.find(v.maintenanceVehicle).then(function (mv) {
           self.maintenanceItemDAO.where(
             self.AND(
               self.EQ(self.MaintenanceItem.VEHICLE, mv.id),
               self.OR(
-                self.LT(self.MaintenanceItem.ODEMETER, ddis),
+                self.LT(self.MaintenanceItem.ODOMETER, ddis),
                 self.LT(self.MaintenanceItem.TIME_MILLI, ddate)
               )
             )
