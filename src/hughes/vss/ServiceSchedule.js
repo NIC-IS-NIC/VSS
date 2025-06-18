@@ -30,7 +30,7 @@ foam.CLASS({
       class: 'Reference',
       of: 'hughes.vss.Vehicle',
       tableCellFormatter:function(value, obj) {
-        obj.VehicleDAO
+        obj.vehicleDAO
         .find(value)
         .then((Vehicle)=> this.add(Vehicle.toSummary()))
         .catch((error) => this.add(value));
