@@ -46,7 +46,7 @@ foam.CLASS({
       }
     },
     {
-      name: 'odemeter',
+      name: 'odometer',
       class: 'Int',
       required: true,
       postSet: function (old,nu) {
@@ -92,7 +92,7 @@ foam.CLASS({
         var odis;
         var odate;
         if (schedule) {
-          odis = schedule.odemeter;
+          odis = schedule.odometer;
           odate = schedule.serviceDate;
         } else {
           odis = v.purchaseOdometer;
