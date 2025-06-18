@@ -1,0 +1,16 @@
+p({
+  "class":"foam.core.auth.User",
+  "id":42,
+  "spid":"vSS",
+  "lifecycleState":1,
+  "group":"system",
+  "firstName":"admin",
+  "middleName":"",
+  "lastName":"admin",
+  "email":"admin@vSS",
+  "userName":"admin",
+  "birthday":"1982-07-07T23:12:00.0Z",
+  "password":"g4NjtXMq9ok=:KIJJ865V6H6yGP3Pw9b9P2IN4D1KTUlkHMcsMWLJ+mTZnGrPBy5aDg0oHSEGnCPTDF1ZbFrUFNOSjC8lCHeUNg==",
+  "emailVerified":true,
+  "loginEnabled":true
+})
